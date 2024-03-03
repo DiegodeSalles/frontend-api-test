@@ -1,0 +1,33 @@
+<dialog id="myModal" class="modal">
+  <div class="modal-box glass size-fit-content !bg-none">
+    <h3 class="font-bold text-lg" id="user_name"></h3>
+    <br>
+    <div class="flex flex-col items-center" id="user_data">
+      <label class="input input-bordered w-full max-w-xs flex items-center gap-2" for="name">
+        Name:
+        <input type="text" class="grow modal_form_data" id="modal_name">
+      </label>
+      <br>
+      <label class="input input-bordered w-full max-w-xs flex items-center gap-2" for="phone">
+        Phone:
+        <input type="text" class="grow modal_form_data" id="modal_phone">
+      </label>
+      <br>
+      <label class="input input-bordered w-full max-w-xs flex items-center gap-2" for="email">
+        Email:
+        <input type="text" class="grow modal_form_data" id="modal_email">
+      </label>
+      <br>
+      <label class="input input-bordered w-full max-w-xs flex items-center gap-2" for="password">
+        Password:
+        <input type="password" class="grow modal_form_data" id="modal_password">
+      </label>
+      <p id="update_user_successful"></p>
+    </div>
+    <div class="modal-action">
+      <button class="btn btn-warning update_btn" id="">Update</button>
+      <button class="btn btn-error delete_btn" id="">Delete</button>
+      <button class="btn" id="closeModal">Close</button>
+    </div>
+  </div>
+</dialog>
