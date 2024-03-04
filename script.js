@@ -1,4 +1,4 @@
-const baseURL = 'http://localhost/projeto_pdo/endpoints/restful.php';
+const baseURL = 'http://localhost/projeto_pdo/controller/restful.php';
 const insertData = document.getElementById('insertData');
 const getData = document.getElementById('getData');
 const myModal = document.getElementById('myModal');
