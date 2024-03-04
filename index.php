@@ -12,7 +12,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="bg-[url('./imagem-bonita.jpg')] bg-fixed bg-cover min-h-dvh">
+<body class="min-h-dvh">
   <div class="">
 
 

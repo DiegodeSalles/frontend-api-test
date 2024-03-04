@@ -8,7 +8,10 @@ axios.defaults.baseURL = baseURL;
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 
 insertData.addEventListener('submit', handleDataInsert);
-getData.addEventListener('click', handleGetData);
+getData.addEventListener('click', (event) => {
+  event.preventDefault();
+  handleGetData();
+});
 
 async function handleDataInsert(event) {
   event.preventDefault();
@@ -77,9 +80,9 @@ async function getUserData(id) {
   }
 }
 
-async function updateUser(id, user) {
+async function updateUser(user) {
   try {
-    await axios.put(`${baseURL}?id=${id}`, user);
+    await axios.put(`${baseURL}?id=${user.id}`, user); // Utiliza user.id para acessar o identificador
 
     const update_user = document.getElementById('update_user_successful');
     const { name, phone, email, password } = user;
@@ -95,16 +98,18 @@ async function updateUser(id, user) {
   }
 }
 
-function openModal(id) {
+
+function openModal(userId) {
   const update_user = document.getElementById('update_user_successful');
   const update_btn = document.querySelector('.update_btn');
+  const id = userId; // Armazena o id localmente
 
   if (!update_btn.classList.contains('btn-disabled')) {
     update_btn.classList.toggle('btn-disabled');
   }
   update_user.textContent = '';
 
-  update_btn.removeEventListener('click', handleUpdateUser);
+  update_btn.removeEventListener('click', handleUpdateUser); // Remove o event listener anterior
 
   myModal.showModal();
   deleteBtn.addEventListener('click', () => deleteData(id));
@@ -113,15 +118,16 @@ function openModal(id) {
     e.addEventListener('input', () => update_btn.classList.remove('btn-disabled'));
   });
 
-  update_btn.addEventListener('click', handleUpdateUser);
+  update_btn.addEventListener('click', () => handleUpdateUser(id)); // Passa o id para handleUpdateUser
 
-  function handleUpdateUser() {
+  function handleUpdateUser(id) {
     const name = document.getElementById('modal_name').value;
     const phone = document.getElementById('modal_phone').value;
     const email = document.getElementById('modal_email').value;
     const password = document.getElementById('modal_password').value;
 
-    const user = { name, phone, email, password };
-    updateUser(id, user);
+    const user = { id, name, phone, email, password }; // Inclui o id no objeto user
+    updateUser(user); // Passa o objeto user para a função updateUser
   }
 }
+
