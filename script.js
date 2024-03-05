@@ -18,8 +18,9 @@ async function handleDataInsert(event) {
   try {
     const formData = new FormData(event.target);
     const jsonData = Object.fromEntries(formData);
-    await axios.post(baseURL, JSON.stringify(jsonData));
-    await listIdUser();
+    const {data} = await axios.post(baseURL, JSON.stringify(jsonData));
+    // await listIdUser();
+    console.log(data);
   } catch (error) {
     console.log(error);
   }
@@ -82,7 +83,7 @@ async function getUserData(id) {
 
 async function updateUser(user) {
   try {
-    await axios.put(`${baseURL}?id=${user.id}`, user); // Utiliza user.id para acessar o identificador
+    await axios.put(`${baseURL}?id=${user.id}`, user);
 
     const update_user = document.getElementById('update_user_successful');
     const { name, phone, email, password } = user;
@@ -102,23 +103,29 @@ async function updateUser(user) {
 function openModal(userId) {
   const update_user = document.getElementById('update_user_successful');
   const update_btn = document.querySelector('.update_btn');
-  const id = userId; // Armazena o id localmente
+  const id = userId;
 
   if (!update_btn.classList.contains('btn-disabled')) {
     update_btn.classList.toggle('btn-disabled');
+    update_btn.removeEventListener('click', handleUpdateUser);
   }
+
+  if (update_btn.classList.contains('btn-disabled')) {
+    document.querySelectorAll('.modal_form_data').forEach((e) => {
+      e.addEventListener('input', () => update_btn.classList.remove('btn-disabled'));
+    });
+    update_btn.addEventListener('click', () => handleUpdateUser(id));
+  }
+
   update_user.textContent = '';
 
-  update_btn.removeEventListener('click', handleUpdateUser); // Remove o event listener anterior
 
   myModal.showModal();
+
   deleteBtn.addEventListener('click', () => deleteData(id));
   document.querySelector('#closeModal').addEventListener('click', () => myModal.close());
-  document.querySelectorAll('.modal_form_data').forEach((e) => {
-    e.addEventListener('input', () => update_btn.classList.remove('btn-disabled'));
-  });
 
-  update_btn.addEventListener('click', () => handleUpdateUser(id)); // Passa o id para handleUpdateUser
+
 
   function handleUpdateUser(id) {
     const name = document.getElementById('modal_name').value;
@@ -126,8 +133,8 @@ function openModal(userId) {
     const email = document.getElementById('modal_email').value;
     const password = document.getElementById('modal_password').value;
 
-    const user = { id, name, phone, email, password }; // Inclui o id no objeto user
-    updateUser(user); // Passa o objeto user para a função updateUser
+    const user = { id, name, phone, email, password };
+    updateUser(user);
   }
 }
 

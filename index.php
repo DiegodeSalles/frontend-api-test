@@ -1,23 +1,22 @@
-
 <!DOCTYPE html>
-<html data-theme="dim" lang="en">
+<html data-theme="forest" lang="en">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title></title>
 
-  <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet" type="text/css" />
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet" type="text/css" />
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="min-h-dvh">
-  <div class="">
+<body class="">
+  <div class="bg-cover min-h-dvh" style="background-image: url('./imagem-bonita.jpg');">
 
 
     <div class="form-control">
-      <form class="flex flex-col items-center" id="insertData" method="POST">
+      <form class="flex flex-col items-center mb-2" id="insertData" method="POST">
         <h1 class="text-slate-950">Testes com PDO</h1>
         <label class="input input-bordered w-full max-w-xs items-center gap-2 flex" for="user">
           Usuário:
@@ -54,7 +53,7 @@
 
     <p id="message"></p>
 
-    <div id="users"></div>
+    <div class="overflow-x-auto" id="users"></div>
 
     <?php include 'modal.html'; ?>
     <script src="script.js"></script>
